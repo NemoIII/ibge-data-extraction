@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_PATH=/data/data.db
+
+  db:
+    image: sqlite
+    volumes:
+      - db_data:/data
+
+volumes:
+  db_data:
