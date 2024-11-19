@@ -35,6 +35,14 @@ class SQLiteDB:
         """
         Insere um registro no banco de dados.
         """
+        # Validação explícita dos tipos de dados
+        if not isinstance(region, str):
+            raise ValueError(f"Região inválida: {region}")
+        if not isinstance(year, int):
+            raise ValueError(f"Ano inválido: {year}")
+        if not isinstance(gini_index, (int, float)):
+            raise ValueError(f"Índice de Gini inválido: {gini_index}")
+
         query = "INSERT INTO gini_data (region, year, gini_index) VALUES (?, ?, ?);"
         self.conn.execute(query, (region, year, gini_index))
         self.conn.commit()

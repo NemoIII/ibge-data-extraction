@@ -39,45 +39,34 @@ class DataProcessor:
             print("DataFrame vazio. Nenhum dado para processar.")
             return
 
-        # Iterar sobre as linhas e salvar no banco de dados
+        # Definir o ano fixo (ou dinamicamente extraído)
+        year = 1991
+
         for index, row in df.iterrows():
-            # Supondo que as colunas de interesse são A (região) e B (índice de Gini)
-            if index == 0:  # Ignorar a primeira linha se for título global
-                continue
-
-            region = row[0]  # Primeira coluna
-            gini_index = row[1]  # Segunda coluna
-            year = 1991  # Ano fixo (ou extraído dinamicamente)
-
-            # Verificar se a região é válida
-            if pd.isna(region) or not isinstance(region, str):
-                print(f"Valor inválido encontrado na região: {region}. Ignorando.")
-                continue
-
-            # Limpeza e validação do índice de Gini
             try:
+                # Extração e limpeza dos dados
+                region = row[0]
+                gini_index = row[1]
+
+                # Validar 'region'
+                if pd.isna(region) or not isinstance(region, str):
+                    print(f"[Linha {index}] Região inválida: {region}. Ignorando.")
+                    continue
+                region = region.strip()
+
+                # Validar e converter 'gini_index'
                 if pd.isna(gini_index) or not isinstance(gini_index, (int, float)):
-                    raise ValueError(f"Índice de Gini inválido: {gini_index}")
+                    raise ValueError(
+                        f"[Linha {index}] Índice de Gini inválido: {gini_index}"
+                    )
                 gini_index = float(gini_index)
-            except (ValueError, TypeError):
-                print(
-                    f"Valor inválido encontrado: {region} ou {gini_index}. Ignorando."
-                )
-                continue
 
-            # Garantir que o ano seja convertido para inteiro
-            try:
-                year = int(year)  # Converte explicitamente o ano para inteiro
+                # Garantir que o ano seja válido
                 if not isinstance(year, int):
-                    raise ValueError(f"Valor de year não é inteiro: {year}")
-            except ValueError:
-                print(f"Erro ao converter o ano: {year}. Ignorando {region}.")
-                continue
+                    raise ValueError(f"[Linha {index}] Ano inválido: {year}")
 
-            # Salvar no banco de dados
-            try:
-                db.insert_data(
-                    region=region.strip(), year=int(year), gini_index=gini_index
-                )
+                # Salvar no banco de dados
+                db.insert_data(region=region, year=year, gini_index=gini_index)
+
             except Exception as e:
-                print(f"Erro ao salvar no banco para {region}: {e}")
+                print(f"[Linha {index}] Erro ao processar dados: {e}")
