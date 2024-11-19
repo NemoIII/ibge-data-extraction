@@ -7,7 +7,7 @@ click==8.1.7
 et_xmlfile==2.0.0
 flake8==7.1.1
 h11==0.14.0
--e git+ssh://git@github.com/NemoIII/ibge-data-extraction.git@256cb7588c21c38fdec77d69939cede6460dae64#egg=ibge_data_extraction
+-e git+https://github.com/NemoIII/ibge-data-extraction.git@<commit-hash>#egg=ibge_data_extraction
 idna==3.10
 iniconfig==2.0.0
 mccabe==0.7.0
