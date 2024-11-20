@@ -83,32 +83,32 @@ Como o Selenium é usado para realizar downloads automáticos, você precisa con
    python main.py
 
 6. **Exporte os dados para CSV (opcional):**
--	Certifique-se de que os dados foram salvos no banco de dados.
--	Rode o script de exportação:
+- Certifique-se de que os dados foram salvos no banco de dados.
+- Rode o script de exportação:
    ```bash
    python export_csv.py
 
 
 ### Com Docker
 
-1.	**Clone o repositório:**
+1. **Clone o repositório:**
    ```bash
    git clone https://github.com/NemoIII/ibge-data-extraction.git
    cd ibge-data-extraction
 
-2.	**Construa os containers:**
+2. **Construa os containers:**
    ```bash
    docker-compose build
 
-3.	**Inicie os serviços:**
+3. **Inicie os serviços:**
    ```bash
    docker-compose up
 
-4.	**Acompanhe os logs:**
+4. **Acompanhe os logs:**
 -	Os logs do container mostram o progresso da aplicação.
 -	Use Ctrl+C para finalizar o processo.
 
-5.	**Exporte os dados para CSV (opcional):**
+5. **Exporte os dados para CSV (opcional):**
 -	Certifique-se de que o serviço foi finalizado corretamente.
 -	Rode o container para exportar os dados:
 
@@ -124,13 +124,14 @@ Como o Selenium é usado para realizar downloads automáticos, você precisa con
 ### CI/CD
 
 Este projeto utiliza GitHub Actions para CI/CD. Os testes e validações são executados automaticamente ao fazer commits ou abrir Pull Requests. Para garantir que seu código está conforme os padrões, utilize:
--	pytest: Para garantir que os testes passem.
--	flake8: Para validar o estilo do código:
+- pytest: Para garantir que os testes passem.
+- flake8: Para validar o estilo do código:
    ```bash
    flake8 .
 
 
 ### Contribuição
+
 Contribuições são bem-vindas! Siga as etapas abaixo:
 1.	Faça um fork do repositório.
 2.	Crie uma nova branch:
