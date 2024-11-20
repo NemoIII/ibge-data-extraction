@@ -6,19 +6,21 @@ class SQLiteDB:
     def __init__(self, db_path="data.db"):
         """
         Inicializa a conexão com o banco SQLite.
+        Cria o diretório do banco de dados, caso necessário.
         """
-        # Cria o diretório do banco de dados, se necessário
+        # Cria o diretório do banco de dados (se especificado)
         db_dir = os.path.dirname(db_path)
         if db_dir:  # Apenas cria se houver um diretório no caminho
             os.makedirs(db_dir, exist_ok=True)
 
         self.db_path = db_path
         self.conn = sqlite3.connect(self.db_path)
-        self.create_table()
+        self.create_table()  # Cria a tabela se ela ainda não existir
 
     def create_table(self):
         """
-        Cria a tabela para armazenar os dados do índice de Gini.
+        Cria a tabela 'gini_data' no banco de dados.
+        Essa tabela armazena informações processadas sobre o índice de Gini.
         """
         query = """
         CREATE TABLE IF NOT EXISTS gini_data (
