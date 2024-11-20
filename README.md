@@ -88,6 +88,7 @@ Como o Selenium é usado para realizar downloads automáticos, você precisa con
    ```bash
    python export_csv.py
 
+
 ### Com Docker
 
 1.	**Clone o repositório:**
@@ -111,12 +112,14 @@ Como o Selenium é usado para realizar downloads automáticos, você precisa con
 -	Certifique-se de que o serviço foi finalizado corretamente.
 -	Rode o container para exportar os dados:
 
+
 ### Testes
 
 1. Para executar os testes automatizados do projeto, utilize o comando abaixo:
 - Certifique-se de que todas as dependências estão instaladas e o ambiente virtual está ativado.
    ```bash
    pytest -v
+
 
 ### CI/CD
 
@@ -125,6 +128,7 @@ Este projeto utiliza GitHub Actions para CI/CD. Os testes e validações são ex
 -	flake8: Para validar o estilo do código:
    ```bash
    flake8 .
+
 
 ### Contribuição
 Contribuições são bem-vindas! Siga as etapas abaixo:
