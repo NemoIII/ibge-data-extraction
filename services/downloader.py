@@ -8,9 +8,20 @@ from selenium.webdriver.chrome.options import Options
 
 
 class IBGEDownloader:
+    """
+    Classe responsável por automatizar o download de dados do IBGE usando Selenium.
+    O Selenium foi escolhido devido à necessidade de interagir com um site dinâmico,
+    onde elementos (ex.: botões e menus) só estão disponíveis após eventos no front-end.
+    """
+
     BASE_URL = "https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html"
 
     def __init__(self, output_dir="downloads"):
+        """
+        Inicializa o driver do Selenium.
+        Parâmetros:
+            - driver: Instância do Selenium WebDriver.
+        """
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 

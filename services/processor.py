@@ -7,26 +7,31 @@ class DataProcessor:
     @staticmethod
     def process_zip_and_save_to_db(zip_path, db_path="data.db"):
         """
-        Processa arquivos .zip, extrai os dados de arquivos .xls e salva no banco de dados.
+        Processa arquivos .zip contendo dados em formato .xls.
+        Extraímos os dados, processamos e salvamos no banco de dados SQLite.
+
+        Parâmetros:
+            - zip_path (str): Caminho para o arquivo .zip.
+            - db_path (str): Caminho do banco de dados SQLite.
         """
-        # Conectar ao banco de dados
+        # Inicializa a conexão com o banco de dados
         db = SQLiteDB(db_path)
 
-        # Extrair arquivos do .zip
+        # Extrai todos os arquivos do arquivo zip
         with zipfile.ZipFile(zip_path, "r") as z:
             file_names = z.namelist()
             for file_name in file_names:
-                if file_name.endswith(".XLS"):  # Verificar se o arquivo é .xls
+                if file_name.endswith(".XLS"):  # Verifica se o arquivo é um Excel
                     print(f"Processando: {file_name}")
                     with z.open(file_name) as file:
-                        # Ler o arquivo .xls com pandas
                         try:
-                            df = pd.read_excel(file, header=None)  # Sem cabeçalhos
+                            # Lê o arquivo Excel sem cabeçalhos
+                            df = pd.read_excel(file, header=None)
                             DataProcessor.process_dataframe(df, db)
                         except Exception as e:
                             print(f"Erro ao processar {file_name}: {e}")
 
-        # Fechar a conexão com o banco de dados
+        # Fecha a conexão com o banco de dados
         db.close()
 
     @staticmethod
